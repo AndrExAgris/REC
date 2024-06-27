@@ -9,3 +9,4 @@ sudo apt-get update --fix-missing
 sudo apt upgrade
 
 sudo apt install python3-ryu
+sudo apt install iperf3
