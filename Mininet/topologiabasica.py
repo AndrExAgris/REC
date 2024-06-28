@@ -1,31 +1,33 @@
 from mininet.topo import Topo
+from mininet.net import Mininet
+from mininet.node import OVSSwitch
+from mininet.cli import CLI
+from mininet.log import setLogLevel
 
 class Topologia(Topo):
-
     def __init__(self):
-        #Inicia a topologia da rede
-        Topo.__init__( self )
+        Topo.__init__(self)
 
         # Hosts
-        pc0 = self.addHost('PC0', ip='127.0.1.1')
-        pc1 = self.addHost('PC1', ip='127.0.1.2')
-        pc2 = self.addHost('PC2', ip='127.0.2.1')
-        pc3 = self.addHost('PC3', ip='127.0.2.2')
-        pc4 = self.addHost('PC4', ip='127.0.3.1')
-        pc5 = self.addHost('PC5', ip='127.0.3.2')
-        pc6 = self.addHost('PC6', ip='127.0.4.1')
-        pc7 = self.addHost('PC7', ip='127.0.4.2')
-        pc8 = self.addHost('PC8', ip='127.0.5.1')
-        pc9 = self.addHost('PC9', ip='127.0.5.2')
+        pc0 = self.addHost('PC0', ip='10.10.10.1')
+        pc1 = self.addHost('PC1', ip='10.10.10.2')
+        pc2 = self.addHost('PC2', ip='10.10.20.1')
+        pc3 = self.addHost('PC3', ip='10.10.20.2')
+        pc4 = self.addHost('PC4', ip='10.10.30.1')
+        pc5 = self.addHost('PC5', ip='10.10.30.2')
+        pc6 = self.addHost('PC6', ip='10.10.40.1')
+        pc7 = self.addHost('PC7', ip='10.10.40.2')
+        pc8 = self.addHost('PC8', ip='10.10.50.1')
+        pc9 = self.addHost('PC9', ip='10.10.50.2')
 
         # Switches
-        sw0 = self.addSwitch('SW0', failMode='standalone', stp=True)
-        sw1 = self.addSwitch('SW1', failMode='standalone', stp=True)
-        sw2 = self.addSwitch('SW2', failMode='standalone', stp=True)
-        sw3 = self.addSwitch('SW3', failMode='standalone', stp=True)
-        sw4 = self.addSwitch('SW4', failMode='standalone', stp=True)
-        sw5 = self.addSwitch('SW5', failMode='standalone', stp=True)
-        sw6 = self.addSwitch('SW6', failMode='standalone', stp=True)
+        sw0 = self.addSwitch('SW0')
+        sw1 = self.addSwitch('SW1')
+        sw2 = self.addSwitch('SW2')
+        sw3 = self.addSwitch('SW3')
+        sw4 = self.addSwitch('SW4')
+        sw5 = self.addSwitch('SW5')
+        sw6 = self.addSwitch('SW6')
 
         # Links
         self.addLink(pc0, sw1)
@@ -48,3 +50,22 @@ class Topologia(Topo):
         self.addLink(sw2, sw6)
 
 topos = { 'Topologia': ( lambda: Topologia() ) }
+
+def run():
+    topo = Topologia()
+    net = Mininet(topo=topo, switch=OVSSwitch, build=False)
+    net.build()
+
+    # Configurar switches no modo standalone e ativar STP
+    for sw in net.switches:
+        sw.cmd('ovs-vsctl set Bridge', sw, 'stp_enable=true')
+        sw.cmd('ovs-vsctl set-fail-mode', sw, 'standalone')
+
+    net.start()
+    CLI(net)
+    net.stop()
+
+if __name__ == '__main__':
+    setLogLevel('info')
+    run()
+

@@ -1,4 +1,4 @@
-sudo mn --custom topologia.py --topo Topologia
+sudo mn --custom topologia.py 
 
 sudo mn --custom topologiabasica.py --topo Topologia
 
