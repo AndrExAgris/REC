@@ -11,7 +11,7 @@ cli = CLI(net, script='/dev/null')
 
 mininet.log.info('\n*** Add nodes\n')
 
-c1 = net.addController('c1', controller=mininet.node.RemoteController, ip='192.168.0.1', port=6653)
+c1 = net.addController('c1', controller=mininet.node.RemoteController, ip='127.0.0.1', port=6653)
 PC0 = net.addHost('PC0', ip='192.168.10.1')
 PC1 = net.addHost('PC1', ip='192.168.10.2')
 PC2 = net.addHost('PC2', ip='192.168.20.1')
