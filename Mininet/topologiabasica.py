@@ -9,16 +9,16 @@ class Topologia(Topo):
         Topo.__init__(self)
 
         # Hosts
-        pc0 = self.addHost('PC0', ip='10.10.10.1')
-        pc1 = self.addHost('PC1', ip='10.10.10.2')
-        pc2 = self.addHost('PC2', ip='10.10.20.1')
-        pc3 = self.addHost('PC3', ip='10.10.20.2')
-        pc4 = self.addHost('PC4', ip='10.10.30.1')
-        pc5 = self.addHost('PC5', ip='10.10.30.2')
-        pc6 = self.addHost('PC6', ip='10.10.40.1')
-        pc7 = self.addHost('PC7', ip='10.10.40.2')
-        pc8 = self.addHost('PC8', ip='10.10.50.1')
-        pc9 = self.addHost('PC9', ip='10.10.50.2')
+        pc0 = self.addHost('PC0', ip='192.168.10.1')
+        pc1 = self.addHost('PC1', ip='192.168.10.2')
+        pc2 = self.addHost('PC2', ip='192.168.20.1')
+        pc3 = self.addHost('PC3', ip='192.168.20.2')
+        pc4 = self.addHost('PC4', ip='192.168.30.1')
+        pc5 = self.addHost('PC5', ip='192.168.30.2')
+        pc6 = self.addHost('PC6', ip='192.168.40.1')
+        pc7 = self.addHost('PC7', ip='192.168.40.2')
+        pc8 = self.addHost('PC8', ip='192.168.50.1')
+        pc9 = self.addHost('PC9', ip='192.168.50.2')
 
         # Switches
         sw0 = self.addSwitch('SW0')
